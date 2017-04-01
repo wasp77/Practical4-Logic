@@ -131,12 +131,6 @@ int ttable(int num, char* formula) {
     }
     printf(" :   %d\n", list[index]);
   }
-
-
-
-  for (int i = 0; i < rows; i++) {
-    free(tabel[i]);
-  }
 }
 
 
