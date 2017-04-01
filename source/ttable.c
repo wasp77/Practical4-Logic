@@ -68,7 +68,6 @@ int ttable(int num, char* formula) {
     for (int z = 0; formula[z] != '\0'; z++) {
       switch (formula[z]) {
         case '|':
-          assert(columns == 7);
           list[index - 1] = list[index - 1] | list[index];
           tabel[x][columns] = list[index - 1];
           printf("%d", tabel[x][columns]);
@@ -76,7 +75,6 @@ int ttable(int num, char* formula) {
           index--;
           break;
         case '&':
-          assert(columns == 4);
           list[index - 1] = list[index - 1] & list[index];
           tabel[x][columns] = list[index - 1];
           printf("%d", tabel[x][columns]);
@@ -84,7 +82,6 @@ int ttable(int num, char* formula) {
           index--;
           break;
         case '#':
-          assert(columns == 3);
           list[index - 1] = list[index - 1] ^ list[index];
           tabel[x][columns] = list[index - 1];
           printf("%d", tabel[x][columns]);
@@ -92,7 +89,6 @@ int ttable(int num, char* formula) {
           index--;
           break;
         case '>':
-          assert(columns == 10);
           list[index - 1] = implication(list[index - 1], list[index]);
           tabel[x][columns] = list[index - 1];
           printf("%d", tabel[x][columns]);
@@ -100,7 +96,6 @@ int ttable(int num, char* formula) {
           index--;
           break;
         case '=':
-          assert(columns == 8);
           list[index - 1] = equals(list[index - 1], list[index]);
           tabel[x][columns] = list[index - 1];
           printf("%d", tabel[x][columns]);
