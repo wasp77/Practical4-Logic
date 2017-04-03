@@ -4,7 +4,7 @@ typedef struct Letter {
 } Letter;
 
 int** make_2DArray(int length);
-int ttable(int length, int num, char* formula);
+int ttable(int num, char* formula);
 int implication(int num1, int num2);
 int equals(int num1, int num2);
 int negation(int num);

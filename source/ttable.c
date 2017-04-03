@@ -4,8 +4,6 @@
 #include <assert.h>
 #include <string.h>
 
-static int alphabet_num = 26;
-
 int main(int argc, char *argv[]) {
   int num = atoi(argv[1]);
   int length = strlen(argv[2]);
@@ -19,18 +17,18 @@ int main(int argc, char *argv[]) {
     return 4;
   }
   strcpy(formula, argv[2]);
-  ttable(length, num, formula);
+  ttable(num, formula);
   return 0;
 }
 
-int ttable(int length, int num, char* formula) {
+int ttable(int num, char* formula) {
   int rows = 2;
   for (int n = 1; n < num; n++) {
     rows = rows * 2;
   }
 
   int tabel[rows][num];
-  Letter letter_list[alphabet_num];
+  Letter letter_list[26];
 
   int count = 0;
   int output_count = 0;
@@ -44,7 +42,7 @@ int ttable(int length, int num, char* formula) {
     count++;
   }
 
-  char title[length + 11];
+  char title[1050];
   strcpy(title, ": ");
   strcat(title, formula);
   strcat(title, " : Result");
@@ -57,7 +55,7 @@ int ttable(int length, int num, char* formula) {
   }
   printf("\n");
 
-  int list[length];
+  int list[1001];
 
   for (int x = 0; x < rows; x++) {
     int counter = 0;
@@ -116,7 +114,7 @@ int ttable(int length, int num, char* formula) {
           printf(" ");
           break;
         default :
-          for (int i = 0; i < alphabet_num; i++) {
+          for (int i = 0; i < 26; i++) {
             if (formula[z] == letter_list[i].designation) {
               index++;
               list[index] = letter_list[i].val;
