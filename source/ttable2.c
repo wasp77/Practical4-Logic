@@ -7,16 +7,23 @@
 int main(int argc, char *argv[]) {
   int num = atoi(argv[1]);
   char formula[1001];
+  char formula2[1001];
   if (strlen(argv[2]) > 1000) {
     printf("The formula is too long\n");
     return 4;
   }
-  if (argc > 3) {
+
+  if (argc == 4) {
+    strcpy(formula, argv[2]);
+    strcpy(formula2, argv[3]);
+    compare(formula, formula2);
+  } else if (argc > 4) {
     printf("Too many arguements passed\n");
     return 4;
+  } else {
+    strcpy(formula, argv[2]);
+    ttable(num, formula);
   }
-  strcpy(formula, argv[2]);
-  ttable(num, formula);
   return 0;
 }
 
@@ -45,8 +52,8 @@ int ttable(int num, char* formula) {
   strcpy(title, ": ");
   strcat(title, formula);
   strcat(title, " : Result");
-
   printf("%s\n", title);
+
   output_count = output_count + strlen(title);
 
   for (int j = 0; j < output_count; j++) {
@@ -55,6 +62,7 @@ int ttable(int num, char* formula) {
   printf("\n");
 
   int list[1001];
+  int results[rows];
 
   for (int x = 0; x < rows; x++) {
     int counter = 0;
@@ -123,8 +131,11 @@ int ttable(int num, char* formula) {
           }
       }
     }
+    results[x] = list[index];
     printf(" :   %d\n", list[index]);
   }
+
+  status(results, rows);
 }
 
 int implication(int num1, int num2) {
@@ -153,4 +164,46 @@ int negation(int num) {
   } else {
     return 1;
   }
+}
+
+void status(int* results, int length) {
+  int true_count = 0;
+  int false_count = 0;
+
+  for (int i = 0; i < length; i++) {
+    if (results[i] == 1) {
+      true_count++;
+    } else {
+      false_count++;
+    }
+  }
+
+  if (false_count > 0 && true_count == 0) {
+    printf("The formula is invalid and unsatisfiable\n");
+  } else if (false_count > 0 && true_count > 0) {
+    printf("The formula is invalid and satisfiable\n");
+  } else {
+    printf("The formula is valid\n");
+  }
+
+}
+
+int compare(char* str1, char* str2) {
+  int length1 = strlen(str1);
+  int length2 = strlen(str2);
+
+  if (length1 == length2) {
+    for (int n = 0; n < length1; n++) {
+      if (str1[n] != str2[n]) {
+        printf("Input strings are not equivalent\n");
+        return 0;
+      }
+    }
+    printf("Input strings are equivalent\n");
+  } else {
+    printf("Input strings are not equivalent\n");
+    return 0;
+  }
+  
+  return 1;
 }

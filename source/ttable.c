@@ -4,9 +4,12 @@
 #include <assert.h>
 #include <string.h>
 
+static int alphabet_num = 26;
+
 int main(int argc, char *argv[]) {
   int num = atoi(argv[1]);
-  char formula[1001];
+  int length = strlen(argv[2]);
+  char formula[length];
   if (strlen(argv[2]) > 1000) {
     printf("The formula is too long\n");
     return 4;
@@ -16,18 +19,18 @@ int main(int argc, char *argv[]) {
     return 4;
   }
   strcpy(formula, argv[2]);
-  ttable(num, formula);
+  ttable(length, num, formula);
   return 0;
 }
 
-int ttable(int num, char* formula) {
+int ttable(int length, int num, char* formula) {
   int rows = 2;
   for (int n = 1; n < num; n++) {
     rows = rows * 2;
   }
 
   int tabel[rows][num];
-  Letter letter_list[26];
+  Letter letter_list[alphabet_num];
 
   int count = 0;
   int output_count = 0;
@@ -41,7 +44,7 @@ int ttable(int num, char* formula) {
     count++;
   }
 
-  char title[1050];
+  char title[length + 11];
   strcpy(title, ": ");
   strcat(title, formula);
   strcat(title, " : Result");
@@ -54,7 +57,7 @@ int ttable(int num, char* formula) {
   }
   printf("\n");
 
-  int list[1001];
+  int list[length];
 
   for (int x = 0; x < rows; x++) {
     int counter = 0;
@@ -113,7 +116,7 @@ int ttable(int num, char* formula) {
           printf(" ");
           break;
         default :
-          for (int i = 0; i < 26; i++) {
+          for (int i = 0; i < alphabet_num; i++) {
             if (formula[z] == letter_list[i].designation) {
               index++;
               list[index] = letter_list[i].val;
